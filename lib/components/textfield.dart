@@ -32,7 +32,7 @@ InputDecoration textFieldDecoration =   InputDecoration(
 //to reduce lines of code
               InputDecoration textFieldFunction({required BuildContext context,required String hintTxt}){
                 return textFieldDecoration.copyWith(
-                hintText: 'Enter your Password',
+                hintText: hintTxt,
              hintStyle: TextStyle(
                   color: Theme.of(context).primaryColor
                 ),

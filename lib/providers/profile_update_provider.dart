@@ -14,6 +14,8 @@ import '../models/user_model.dart';
 
 class ProfileUpdate extends ChangeNotifier{
 
+  bool loading =false;
+
     File? imageFile;
   File? croppedFile;
     String url='';
@@ -54,8 +56,7 @@ try {
     croppedFile = File(cropped!.path);
 
     imageFile=croppedFile;
-    
-      log('PROVIDER CRIO LOG');
+  
         notifyListeners();
 } catch (e) {
   log(e.toString());
@@ -68,12 +69,23 @@ try {
 Future uploadFile({required AuthProvider authProvider, required BuildContext context}) async {    
   //  final authProvider =Provider.of<AuthProvider>(context, listen: false);
 if(imageFile !=null){
-           deleteOldProfileP(authProvider.logedUser!.uid.toString());
+  loading=true;
+    notifyListeners();
+
+
+
+
+          //  deleteOldProfileP(authProvider.logedUser!.uid.toString());
 String name = DateTime.now().microsecondsSinceEpoch.toString();
 var image = FirebaseStorage.instance.ref('profile').child('/${name}.jpg');
+
 UploadTask task = image.putFile(imageFile!);
 TaskSnapshot snapshot = await task;
  url = await snapshot.ref.getDownloadURL(); 
+   log(url.toString()+'sssssssssssss');
+
+
+
  if(fullname ==''){
 fullname=authProvider.logedUser!.fullname.toString();
  }
@@ -89,14 +101,18 @@ fullname=authProvider.logedUser!.fullname.toString();
         croppedFile=null;
         fullname='';
 
-   
+   loading=false;
+   notifyListeners();
       }).catchError( (err){
         dialog22(context: context, error: err);
       });
 notifyListeners();
   
 }else{
+  
    if(fullname ==''){
+    loading=true;
+      notifyListeners();
 fullname=authProvider.logedUser!.fullname.toString();
  }
    await FirebaseFirestore.instance.collection('Users').doc(authProvider.logedUser!.uid).update({
@@ -111,6 +127,8 @@ success=true;
 
     
       }).catchError( (err){
+   loading=false;
+     notifyListeners();
         dialog22(context: context, error: err);
       });
 

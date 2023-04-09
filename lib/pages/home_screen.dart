@@ -64,11 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
         actions:  [
           DropDownButton(),
 
-          IconButton(onPressed: (){
-final profileProvider =Provider.of<ProfileUpdate>(context,listen: false);
-profileProvider.deleteOldProfileP(authProvider.logedUser!.uid.toString());
+//           IconButton(onPressed: (){
+// final profileProvider =Provider.of<ProfileUpdate>(context,listen: false);
+// profileProvider.deleteOldProfileP(authProvider.logedUser!.uid.toString());
             
-          } ,icon: Icon(Icons.add))
+//           } ,icon: Icon(Icons.add))
         ],
       ),
       body: Container(

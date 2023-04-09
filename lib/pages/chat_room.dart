@@ -100,7 +100,7 @@ return ListView.builder(
             fontSize: 12
           ),
           ),
-         subtitle:  Text(chatRoomProvider.userModel!.fullname.toString(),
+         subtitle:  Text(isTrue?chatRoomProvider.userModel!.fullname.toString():chatRoomProvider.targetedUser!.fullname.toString(),
             style: TextStyle(color: Theme.of(context).primaryColor,
             fontSize: 10
             ),

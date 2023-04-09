@@ -162,6 +162,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                      ),
                    ),
+
+              value.loading ?      Center(
+                    child: CircularProgressIndicator(),
+                   ):Center(),
                 ],),
               )),
           );
